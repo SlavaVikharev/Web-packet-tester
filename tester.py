@@ -2,7 +2,6 @@ import os
 import random
 import extensions
 import glob
-import colors
 from parser import Parser
 from operator import truth
 
@@ -45,16 +44,15 @@ class Tester:
     def ask_field(self, test, field):
         os.cls()
         print('=' * 50)
-        print(colors.bold('Hex:\n'))
+        print('Hex:\n')
         print(test.hex)
-        ans = input(colors.bold('Input %s:\n' % field))
+        ans = input('Input %s:\n' % field)
         if Test.filter(ans) == Test.filter(test.fields[field]):
-            print(colors.ok_green('Correct'))
+            print('Correct')
         else:
-            print(colors.fail('Wrong'))
-            print('%s: %s' % (colors.header(field),
-                              colors.ok_blue(test.fields[field])))
-        input(colors.bold('Press Enter...'))
+            print('Wrong')
+            print('%s: %s' % (field, test.fields[field]))
+        input('Press Enter...')
 
 
 if __name__ == '__main__':
