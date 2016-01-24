@@ -28,8 +28,6 @@ source mac
     00 1d e5 4c 4c d0
 protocol 3 lvl
     08 00
-ip version
-    45
 flags
     00
 ttl
