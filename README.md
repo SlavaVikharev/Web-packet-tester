@@ -7,12 +7,17 @@ Web-packet-tester
 ```
 # если хочется комментов
 hex
-    hex
+    Some hex data.
+    May be multiline.
+    0011 or
+    00 11 or
+    0 0 1 1 or even
+    00 1 1
+    Doesn't matter.
 field 1
-    singleline value
+    value 1
 field 2
-    multiline
-    value
+    value 2
 ```
  
 + hex должен быть обязательно
@@ -20,7 +25,7 @@ field 2
 + нет пробелов - имя поля
 + хоть один пробел в начале - данные
  
-нифига про безопасность не знаю 
+нифига про безопасность не знаю</br>
 баги можно не искать - сами вылезут 
 
 
