@@ -23,5 +23,4 @@ class Parser:
             else:
                 field = striped
                 current[field] = ''
-        print(tests)
         return tests

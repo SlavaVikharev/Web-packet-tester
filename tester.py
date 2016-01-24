@@ -1,56 +1,64 @@
 import os
+import glob
 import random
+import extensions
 from parser import Parser
+from operator import truth
 
 
 class Test:
-
     def __init__(self, fields):
         self.hex = fields.get('hex')
         if self.hex is None:
             return
         fields = list(fields.items())
         random.shuffle(fields)
-        self.fields = dict(item for item in fields if item[0] != 'hex')
+        self.fields = dict(item for item in fields
+                           if item[0] != 'hex')
 
     @staticmethod
     def filter(value):
         return value.lower().strip().replace(' ', '')
 
 
-def clear_screen():
-    if os.name == 'posix':
-        os.system('clear')
-    else:
-        os.system('cls')
+TESTS_FOLD = 'tests'
+TEST_FILE = '*.anq'
+TESTS_DIR = os.path.join(TESTS_FOLD, TEST_FILE)
 
 
-def ask_question(test, field):
-    clear_screen()
-    print('=' * 50)
-    print('Hex:\n')
-    print(test.hex)
-    ans = input('Input %s:\n' % field)
-    if Test.filter(ans) == Test.filter(test.fields[field]):
-        print('Correct!\n')
-    else:
-        print('Wrong.')
-        print('%s: %s' % (field, test.fields[field]))
+class Tester:
+    def __init__(self, file):
+        tests = Parser.parse(file)
+        tests = random.iter(tests)
+        tests = map(Test, tests)
+        self.tests = filter(truth, tests)
 
+    def ask_tests(self):
+        for test in self.tests:
+            self.ask_fields(test)
 
-TESTS_DIR = 'tests'
+    def ask_fields(self, test):
+        for field in test.fields:
+            self.ask_field(test, field)
+
+    def ask_field(self, test, field):
+        os.cls()
+        print('=' * 50)
+        print('Hex:\n')
+        print(test.hex)
+        ans = input('Input %s:\n' % field)
+        if Test.filter(ans) == Test.filter(test.fields[field]):
+            print('Correct!\n')
+        else:
+            print('Wrong.')
+            print('%s: %s' % (field, test.fields[field]))
+        input('Press Enter...')
+
 
 if __name__ == '__main__':
-    test_files = os.listdir(TESTS_DIR)
-    random.shuffle(test_files)
     while True:
-        for file in test_files:
-            file = open(os.path.join(TESTS_DIR, file))
-            tests = Parser.parse(file)
-            random.shuffle(tests)
-            for test in filter(bool, map(Test, tests)):
-                for field in test.fields:
-                    ask_question(test, field)
-                    input('Press any key')
-            file.close()
-        random.shuffle(test_files)
+        test_files = glob.glob(TESTS_DIR)
+        for file_dir in random.iter(test_files):
+            with open(file_dir) as file:
+                tester = Tester(file)
+                tester.ask_tests()
