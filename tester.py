@@ -2,7 +2,7 @@ import os
 import random
 import extensions
 import glob
-from parser import Parser
+from anq import Parser
 from operator import truth
 
 
