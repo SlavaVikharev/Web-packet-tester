@@ -10,8 +10,6 @@ source mac
     fc f8 ae 1a fc 7f
 type
     0800
-ip version
-    45
 ip flags
     40
 ttl
