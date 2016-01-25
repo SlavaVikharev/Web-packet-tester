@@ -1,0 +1,28 @@
+hex
+    e8 94 f6 10 07 9f c8 6c 87 3f 0a e5 08 06 00 01
+    08 00 06 04 00 01 c8 6c 87 3f 0a e5 c0 a8 01 01
+    00 00 00 00 00 00 c0 a8 01 25
+mac dest
+    e8 94 f6 10 07 9f
+mac src
+    c8 6c 87 3f 0a e5
+ethertype
+    08 06
+hardware type
+    00 01
+protocol type
+    08 00
+hlen
+    06
+plen
+    04
+req or res bytes
+    00 01
+mac src
+    c8 6c 87 3f 0a e5
+ip src
+    c0 a8 01 01
+mac dest
+    00 00 00 00 00 00
+ip dest
+    c0 a8 01 25
